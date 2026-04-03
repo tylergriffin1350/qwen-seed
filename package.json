@@ -1,0 +1,41 @@
+{
+  "name": "qwen-seed",
+  "version": "1.0.0",
+  "description": "Typed project incubator — guided ideation through graduation for Qwen Code",
+  "bin": {
+    "qwen-seed": "bin/install.js"
+  },
+  "files": [
+    "bin",
+    "seed.md",
+    "tasks",
+    "data",
+    "templates",
+    "checklists",
+    "README.md"
+  ],
+  "keywords": [
+    "qwen",
+    "qwen-code",
+    "qwen-cli",
+    "ai",
+    "ideation",
+    "project-planning",
+    "seed",
+    "paul",
+    "skillsmith"
+  ],
+  "author": "Chris Kahler (adapted for Qwen by tylergriffin1350)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylergriffin1350/qwen-seed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tylergriffin1350/qwen-seed/issues"
+  },
+  "homepage": "https://github.com/tylergriffin1350/qwen-seed#readme",
+  "engines": {
+    "node": ">=16.7.0"
+  }
+}
