@@ -5,7 +5,6 @@ const path = require('path');
 const os = require('os');
 const readline = require('readline');
 
-// Colors
 const green = '\x1b[32m';
 const cyan = '\x1b[36m';
 const yellow = '\x1b[33m';
@@ -17,8 +16,8 @@ const pkg = require('../package.json');
 const banner = `
 ${green}  \u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2588\u2588\u2557
   \u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2554\u2550\u2550\u2550\u2550\u255d
-  \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2557  
-  \u2588\u2588\u2554\u2550\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u255d  
+  \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2557
+  \u2588\u2588\u2554\u2550\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u255d
   \u2588\u2588\u2588\u2588\u2588\u2588\u2554\u255d\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2557
   \u255a\u2550\u2550\u2550\u2550\u2550\u255d \u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\u255a\u2550\u2550\u2550\u2550\u2550\u255d${reset}
 
@@ -54,15 +53,27 @@ function expandTilde(filePath) {
   return filePath;
 }
 
-function copyDir(srcDir, destDir, skipDirs = []) {
+/**
+ * Recursively copy directory, replacing ~/.qwen/ paths in .md files
+ * For global installs: pathPrefix = ~/.qwen/
+ * For local installs: pathPrefix = ./.qwen/
+ */
+function copyDir(srcDir, destDir, pathPrefix, skipDirs = []) {
   fs.mkdirSync(destDir, { recursive: true });
   const entries = fs.readdirSync(srcDir, { withFileTypes: true });
   for (const entry of entries) {
     if (skipDirs.includes(entry.name)) continue;
     const srcPath = path.join(srcDir, entry.name);
     const destPath = path.join(destDir, entry.name);
-    if (entry.isDirectory()) copyDir(srcPath, destPath, skipDirs);
-    else fs.copyFileSync(srcPath, destPath);
+    if (entry.isDirectory()) {
+      copyDir(srcPath, destPath, pathPrefix, skipDirs);
+    } else if (entry.name.endsWith('.md')) {
+      let content = fs.readFileSync(srcPath, 'utf8');
+      content = content.replace(/~\/\.qwen\//g, pathPrefix);
+      fs.writeFileSync(destPath, content);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
   }
 }
 
@@ -113,6 +124,9 @@ function install(isGlobal) {
   const qwenDir = isGlobal ? globalDir : path.join(process.cwd(), '.qwen');
   const seedDest = path.join(qwenDir, 'commands', 'qwen-seed');
 
+  // Path prefix for @-reference replacement in .md files
+  const pathPrefix = isGlobal ? '~/.qwen/' : './.qwen/';
+
   const locationLabel = isGlobal
     ? seedDest.replace(os.homedir(), '~')
     : seedDest.replace(process.cwd(), '.');
@@ -126,28 +140,36 @@ function install(isGlobal) {
   console.log(`  Installing to ${cyan}${locationLabel}${reset}\n`);
 
   fs.mkdirSync(seedDest, { recursive: true });
-  fs.copyFileSync(path.join(src, 'seed.md'), path.join(seedDest, 'seed.md'));
+
+  // Copy seed.md with path replacement
+  let seedContent = fs.readFileSync(path.join(src, 'seed.md'), 'utf8');
+  seedContent = seedContent.replace(/~\/\.qwen\//g, pathPrefix);
+  fs.writeFileSync(path.join(seedDest, 'seed.md'), seedContent);
   console.log(`  ${green}+${reset} seed.md ${dim}(entry point)${reset}`);
 
+  // Copy tasks with path replacement
   const tasksSrc = path.join(src, 'tasks');
   const tasksDest = path.join(seedDest, 'tasks');
-  copyDir(tasksSrc, tasksDest);
+  copyDir(tasksSrc, tasksDest, pathPrefix);
   console.log(`  ${green}+${reset} tasks/ ${dim}(${countFiles(tasksSrc, '.md')} task files)${reset}`);
 
+  // Copy data with path replacement
   const dataSrc = path.join(src, 'data');
   const dataDest = path.join(seedDest, 'data');
-  copyDir(dataSrc, dataDest);
+  copyDir(dataSrc, dataDest, pathPrefix);
   const typeCount = fs.readdirSync(dataSrc, { withFileTypes: true }).filter(e => e.isDirectory()).length;
   console.log(`  ${green}+${reset} data/ ${dim}(${typeCount} types, ${countFiles(dataSrc, '.md')} files)${reset}`);
 
+  // Copy templates with path replacement
   const templatesSrc = path.join(src, 'templates');
   const templatesDest = path.join(seedDest, 'templates');
-  copyDir(templatesSrc, templatesDest);
+  copyDir(templatesSrc, templatesDest, pathPrefix);
   console.log(`  ${green}+${reset} templates/ ${dim}(${countFiles(templatesSrc, '.md')} templates)${reset}`);
 
+  // Copy checklists with path replacement
   const checklistsSrc = path.join(src, 'checklists');
   const checklistsDest = path.join(seedDest, 'checklists');
-  copyDir(checklistsSrc, checklistsDest);
+  copyDir(checklistsSrc, checklistsDest, pathPrefix);
   console.log(`  ${green}+${reset} checklists/ ${dim}(planning quality gate)${reset}`);
 
   console.log(`
