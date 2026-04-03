@@ -13,9 +13,9 @@ As a builder with a project category SEED doesn't cover, I want to add a custom 
 </when-to-use>
 
 <context>
-@{~/.qwen/commands/seed/data/application/guide.md} (reference for guide structure)
-@{~/.qwen/commands/seed/data/application/config.md} (reference for config structure)
-@{~/.qwen/commands/seed/data/application/skill-loadout.md} (reference for loadout structure)
+@{~/.qwen/commands/qwen-seed/data/application/guide.md} (reference for guide structure)
+@{~/.qwen/commands/qwen-seed/data/application/config.md} (reference for config structure)
+@{~/.qwen/commands/qwen-seed/data/application/skill-loadout.md} (reference for loadout structure)
 </context>
 
 <steps>
