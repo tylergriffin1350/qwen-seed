@@ -61,10 +61,10 @@ Nothing — SEED is lightweight until a command is invoked.
 @{~/.qwen/commands/seed/tasks/add-type.md} (when user runs /seed add-type)
 
 ## Load on Demand
-@{~/.qwen/commands/seed/data/{type}/guide.md} (after type selection during ideation — conversation sections)
-@{~/.qwen/commands/seed/data/{type}/config.md} (after type selection — rigor level, demeanor, section requirements)
-@{~/.qwen/commands/seed/data/{type}/skill-loadout.md} (during skill loadout step — ecosystem tool recommendations)
-@{~/.qwen/commands/seed/templates/planning-{type}.md} (during PLANNING.md generation)
+`data/{type}/guide.md` (after type selection during ideation — conversation sections)
+`data/{type}/config.md` (after type selection — rigor level, demeanor, section requirements)
+`data/{type}/skill-loadout.md` (during skill loadout step — ecosystem tool recommendations)
+`templates/planning-{type}.md` (during PLANNING.md generation)
 @{~/.qwen/commands/seed/checklists/planning-quality.md} (before graduate/launch — quality gate)
 </routing>
 

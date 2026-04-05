@@ -15,10 +15,10 @@ As a builder with a raw idea, I want guided exploration shaped by my project typ
 
 <context>
 @{~/.qwen/commands/seed/seed.md}
-@{~/.qwen/commands/seed/data/{type}/guide.md} (loaded after type selection)
-@{~/.qwen/commands/seed/data/{type}/config.md} (loaded after type selection)
-@{~/.qwen/commands/seed/data/{type}/skill-loadout.md} (loaded during skill loadout step)
-@{~/.qwen/commands/seed/templates/planning-{type}.md} (loaded during output generation)
+`data/{type}/guide.md` (loaded after type selection)
+`data/{type}/config.md` (loaded after type selection)
+`data/{type}/skill-loadout.md` (loaded during skill loadout step)
+`templates/planning-{type}.md` (loaded during output generation)
 @{~/.qwen/commands/seed/checklists/planning-quality.md} (referenced as quality gate before output)
 </context>
 
