@@ -1,6 +1,6 @@
 {
   "name": "qwen-seed",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Typed project incubator — guided ideation through graduation for Qwen Code",
   "bin": {
     "qwen-seed": "bin/install.js"

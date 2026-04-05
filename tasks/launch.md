@@ -13,8 +13,8 @@ As a builder ready to start building, I want to graduate my project and set up P
 </when-to-use>
 
 <context>
-@{~/.qwen/commands/qwen-seed/seed.md}
-@{~/.qwen/commands/qwen-seed/tasks/graduate.md} (delegation target — launch wraps this flow)
+@{~/.qwen/commands/seed/seed.md}
+@{~/.qwen/commands/seed/tasks/graduate.md} (delegation target — launch wraps this flow)
 </context>
 
 <steps>

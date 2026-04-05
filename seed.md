@@ -54,18 +54,18 @@ Project coach — helps shape raw ideas into structured, buildable plans.
 Nothing — SEED is lightweight until a command is invoked.
 
 ## Load on Command
-@{~/.qwen/commands/qwen-seed/tasks/ideate.md} (when user runs /seed or /seed ideate)
-@{~/.qwen/commands/qwen-seed/tasks/graduate.md} (when user runs /seed graduate)
-@{~/.qwen/commands/qwen-seed/tasks/launch.md} (when user runs /seed launch)
-@{~/.qwen/commands/qwen-seed/tasks/status.md} (when user runs /seed status)
-@{~/.qwen/commands/qwen-seed/tasks/add-type.md} (when user runs /seed add-type)
+@{~/.qwen/commands/seed/tasks/ideate.md} (when user runs /seed or /seed ideate)
+@{~/.qwen/commands/seed/tasks/graduate.md} (when user runs /seed graduate)
+@{~/.qwen/commands/seed/tasks/launch.md} (when user runs /seed launch)
+@{~/.qwen/commands/seed/tasks/status.md} (when user runs /seed status)
+@{~/.qwen/commands/seed/tasks/add-type.md} (when user runs /seed add-type)
 
 ## Load on Demand
-@{~/.qwen/commands/qwen-seed/data/{type}/guide.md} (after type selection during ideation — conversation sections)
-@{~/.qwen/commands/qwen-seed/data/{type}/config.md} (after type selection — rigor level, demeanor, section requirements)
-@{~/.qwen/commands/qwen-seed/data/{type}/skill-loadout.md} (during skill loadout step — ecosystem tool recommendations)
-@{~/.qwen/commands/qwen-seed/templates/planning-{type}.md} (during PLANNING.md generation)
-@{~/.qwen/commands/qwen-seed/checklists/planning-quality.md} (before graduate/launch — quality gate)
+@{~/.qwen/commands/seed/data/{type}/guide.md} (after type selection during ideation — conversation sections)
+@{~/.qwen/commands/seed/data/{type}/config.md} (after type selection — rigor level, demeanor, section requirements)
+@{~/.qwen/commands/seed/data/{type}/skill-loadout.md} (during skill loadout step — ecosystem tool recommendations)
+@{~/.qwen/commands/seed/templates/planning-{type}.md} (during PLANNING.md generation)
+@{~/.qwen/commands/seed/checklists/planning-quality.md} (before graduate/launch — quality gate)
 </routing>
 
 <greeting>

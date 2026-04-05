@@ -81,7 +81,7 @@ Types are composable. Run `/seed add-type` to create your own — just drop file
 ## Architecture
 
 ```
-commands/qwen-seed/
+commands/seed/
 ├── seed.md                         Entry point (routing + persona)
 ├── tasks/
 │   ├── ideate.md                   Type-first guided ideation
@@ -148,7 +148,7 @@ The installer prompts you to choose:
 ### What Gets Installed
 
 ```
-~/.qwen/commands/qwen-seed/
+~/.qwen/commands/seed/
 ├── seed.md              Entry point (routing + persona)
 ├── tasks/               5 task files
 ├── data/                15 type-specific data files (5 types × 3 files)

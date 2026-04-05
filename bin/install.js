@@ -107,7 +107,7 @@ if (hasHelp) {
     npx qwen-seed --local
 
   ${yellow}What gets installed:${reset}
-    ${cyan}commands/qwen-seed/${reset}
+    ${cyan}commands/seed/${reset}
       seed.md              Entry point (routing + persona)
       tasks/               5 task files
       data/                15 type-specific data files
@@ -122,7 +122,7 @@ function install(isGlobal) {
   const configDir = expandTilde(explicitConfigDir) || expandTilde(process.env.QWEN_CONFIG_DIR);
   const globalDir = configDir || path.join(os.homedir(), '.qwen');
   const qwenDir = isGlobal ? globalDir : path.join(process.cwd(), '.qwen');
-  const seedDest = path.join(qwenDir, 'commands', 'qwen-seed');
+  const seedDest = path.join(qwenDir, 'commands', 'seed');
 
   // Path prefix for @-reference replacement in .md files
   const pathPrefix = isGlobal ? '~/.qwen/' : './.qwen/';

@@ -13,8 +13,8 @@ As a builder with a completed PLANNING.md, I want to graduate my project into a 
 </when-to-use>
 
 <context>
-@{~/.qwen/commands/qwen-seed/seed.md}
-@{~/.qwen/commands/qwen-seed/checklists/planning-quality.md} (quality gate — loaded before graduation)
+@{~/.qwen/commands/seed/seed.md}
+@{~/.qwen/commands/seed/checklists/planning-quality.md} (quality gate — loaded before graduation)
 </context>
 
 <steps>
